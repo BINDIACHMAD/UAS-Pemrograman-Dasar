@@ -1,0 +1,4 @@
+void tambahKaryawan(std::vector<Karyawan>& karyawanList, int id, std::string nama, std::string posisi, double gaji) {
+    Karyawan karyawanBaru(id, nama, posisi, gaji);
+    karyawanList.push_back(karyawanBaru);
+}
