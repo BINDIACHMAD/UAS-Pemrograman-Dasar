@@ -1,0 +1,5 @@
+void tampilkanKaryawan(const std::vector<Karyawan>& karyawanList) {
+    for (const auto& karyawan : karyawanList) {
+        std::cout << "ID: " << karyawan.id << "\tNama: " << karyawan.nama << "\tPosisi: " << karyawan.posisi << "\tGaji: " << karyawan.gaji << std::endl;
+    }
+}
