@@ -1,0 +1,5 @@
+void hapusKaryawan(std::vector<Karyawan>& karyawanList, int id) {
+    karyawanList.erase(std::remove_if(karyawanList.begin(), karyawanList.end(), [id](Karyawan& karyawan) {
+        return karyawan.id == id;
+    }), karyawanList.end());
+}
