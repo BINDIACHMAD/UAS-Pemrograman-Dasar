@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+class Karyawan {
+public:
+    int id;
+    std::string nama;
+    std::string posisi;
+    double gaji;
+
+    Karyawan(int id, std::string nama, std::string posisi, double gaji) 
+        : id(id), nama(nama), posisi(posisi), gaji(gaji) {}
+};
+
+void tambahKaryawan(std::vector<Karyawan>& karyawanList, int id, std::string nama, std::string posisi, double gaji) {
+    Karyawan karyawanBaru(id, nama, posisi, gaji);
+    karyawanList.push_back(karyawanBaru);
+}
+
+void hapusKaryawan(std::vector<Karyawan>& karyawanList, int id) {
+    karyawanList.erase(std::remove_if(karyawanList.begin(), karyawanList.end(), [id](Karyawan& karyawan) {
+        return karyawan.id == id;
+    }), karyawanList.end());
+}
+
+void tampilkanKaryawan(const std::vector<Karyawan>& karyawanList) {
+    for (const auto& karyawan : karyawanList) {
+        std::cout << "ID: " << karyawan.id << "\tNama: " << karyawan.nama << "\tPosisi: " << karyawan.posisi << "\tGaji: " << karyawan.gaji << std::endl;
+    }
+}
+
+int main() {
+    std::vector<Karyawan> karyawanList;
+    int pilihan;
+
+    do {
+        std::cout << "Menu:\n1. Tambah Karyawan\n2. Hapus Karyawan\n3. Tampilkan Karyawan\n4. Keluar\nPilih: ";
+        std::cin >> pilihan;
+
+        switch (pilihan) {
+            case 1: {
+                int id;
+                std::string nama, posisi;
+                double gaji;
+                std::cout << "Masukkan ID: ";
+                std::cin >> id;
+                std::cout << "Masukkan Nama: ";
+                std::cin.ignore();
+                std::getline(std::cin, nama);
+                std::cout << "Masukkan Posisi: ";
+                std::getline(std::cin, posisi);
+                std::cout << "Masukkan Gaji: ";
+                std::cin >> gaji;
+                tambahKaryawan(karyawanList, id, nama, posisi, gaji);
+                break;
+            }
+            case 2: {
+                int id;
+                std::cout << "Masukkan ID karyawan yang akan dihapus: ";
+                std::cin >> id;
+                hapusKaryawan(karyawanList, id);
+                break;
+            }
+            case 3: {
+                tampilkanKaryawan(karyawanList);
+                break;
+            }
+            case 4: {
+                std::cout << "Keluar dari program." << std::endl;
+                break;
+            }
+            default: {
+                std::cout << "Pilihan tidak valid." << std::endl;
+                break;
+            }
+        }
+    } while (pilihan != 4);
+
+    return 0;
+}
